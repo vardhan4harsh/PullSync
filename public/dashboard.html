@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - PullSync</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">PullSync</a>
+      <div class="nav-links">
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="#repositories">Repositories</a>
+        <div class="user-menu">
+          <span class="username">User</span>
+          <a href="index.html" class="logout">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Dashboard -->
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Filters</h3>
+        <ul class="filter-list">
+          <li class="active">
+            <span class="filter-icon">📥</span>
+            All Pull Requests
+            <span class="badge">12</span>
+          </li>
+          <li>
+            <span class="filter-icon">👤</span>
+            Assigned to Me
+            <span class="badge">3</span>
+          </li>
+          <li>
+            <span class="filter-icon">✍️</span>
+            Created by Me
+            <span class="badge">5</span>
+          </li>
+          <li>
+            <span class="filter-icon">✅</span>
+            Approved
+            <span class="badge">8</span>
+          </li>
+          <li>
+            <span class="filter-icon">⏳</span>
+            Pending Review
+            <span class="badge">4</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Repositories</h3>
+        <ul class="repo-list">
+          <li>📦 Frontend</li>
+          <li>⚙️ Backend API</li>
+          <li>📱 Mobile App</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-header">
+        <h1>Pull Requests</h1>
+        <button class="btn btn-primary">+ New PR</button>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">12</div>
+          <div class="stat-label">Open PRs</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Need Review</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">8</div>
+          <div class="stat-label">Approved</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">25</div>
+          <div class="stat-label">Merged This Week</div>
+        </div>
+      </div>
+
+      <!-- Pull Requests List -->
+      <div class="pr-list">
+        <!-- PR Card 1 -->
+        <div class="pr-card">
+          <div class="pr-header">
+            <div class="pr-title">
+              <span class="pr-status open">Open</span>
+              <h3>Add user authentication system</h3>
+            </div>
+            <div class="pr-meta">
+              <span class="pr-number">#42</span>
+              <span class="pr-date">2 hours ago</span>
+            </div>
+          </div>
+          <div class="pr-body">
+            <p>Implements JWT-based authentication with login and register endpoints</p>
+            <div class="pr-tags">
+              <span class="tag">feature</span>
+              <span class="tag">backend</span>
+            </div>
+          </div>
+          <div class="pr-footer">
+            <div class="pr-author">
+              <span class="avatar">👤</span>
+              <span>john_dev</span>
+            </div>
+            <div class="pr-stats">
+              <span>+245 -18</span>
+              <span>💬 3</span>
+              <span>✅ 2/3</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PR Card 2 -->
+        <div class="pr-card">
+          <div class="pr-header">
+            <div class="pr-title">
+              <span class="pr-status review">Review</span>
+              <h3>Fix dashboard responsive layout</h3>
+            </div>
+            <div class="pr-meta">
+              <span class="pr-number">#41</span>
+              <span class="pr-date">5 hours ago</span>
+            </div>
+          </div>
+          <div class="pr-body">
+            <p>Updates CSS grid to properly display on mobile devices</p>
+            <div class="pr-tags">
+              <span class="tag">bugfix</span>
+              <span class="tag">frontend</span>
+            </div>
+          </div>
+          <div class="pr-footer">
+            <div class="pr-author">
+              <span class="avatar">👩</span>
+              <span>sarah_design</span>
+            </div>
+            <div class="pr-stats">
+              <span>+87 -34</span>
+              <span>💬 1</span>
+              <span>✅ 1/2</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PR Card 3 -->
+        <div class="pr-card">
+          <div class="pr-header">
+            <div class="pr-title">
+              <span class="pr-status approved">Approved</span>
+              <h3>Add database migration scripts</h3>
+            </div>
+            <div class="pr-meta">
+              <span class="pr-number">#40</span>
+              <span class="pr-date">1 day ago</span>
+            </div>
+          </div>
+          <div class="pr-body">
+            <p>Created migration scripts for initial database setup</p>
+            <div class="pr-tags">
+              <span class="tag">database</span>
+            </div>
+          </div>
+          <div class="pr-footer">
+            <div class="pr-author">
+              <span class="avatar">👨</span>
+              <span>mike_db</span>
+            </div>
+            <div class="pr-stats">
+              <span>+156 -12</span>
+              <span>💬 5</span>
+              <span>✅ 3/3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
