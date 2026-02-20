@@ -4,11 +4,6 @@ const cors = require('cors');
 // Import repository routes
 const repoRoutes = require('./routes/repoRoutes');
 
-// Use repository routes
-app.use('/api/repos', repoRoutes);
-
-
-
 const app = express();
 
 // Middleware
@@ -18,6 +13,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // Serve static files
 app.use(express.static(path.join(__dirname, '../public')));
+
+// Use repository routes
+app.use('/api/repos', repoRoutes);
+
+// API info endpoint
 app.get('/api', (req, res) => {
   res.json({ 
     message: 'PullSync API v0.1',
@@ -40,19 +40,6 @@ app.get('/api/health', (req, res) => {
     status: 'ok', 
     message: 'PullSync API is running',
     timestamp: new Date()
-  });
-});
-
-// Import routes (will be added by team members)
-// Placeholder for now
-app.get('/api', (req, res) => {
-  res.json({ 
-    message: 'PullSync API v0.1',
-    endpoints: {
-      health: '/api/health',
-      auth: '/api/auth (coming soon)',
-      repos: '/api/repos (coming soon)'
-    }
   });
 });
 
