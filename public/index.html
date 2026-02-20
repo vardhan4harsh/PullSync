@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PullSync</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f6f8fa;
+      color: #24292e;
+    }
+    header {
+      background: #24292e;
+      color: #fff;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header h1 { font-size: 1.2rem; font-weight: 600; }
+    main { max-width: 860px; margin: 32px auto; padding: 0 16px; }
+    h2 { font-size: 1.4rem; margin-bottom: 20px; }
+
+    /* PR form */
+    .pr-form {
+      background: #fff;
+      border: 1px solid #d1d5da;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+    .pr-form h3 { margin-bottom: 16px; font-size: 1rem; }
+    .form-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 4px; }
+    .form-group label { font-size: 0.85rem; color: #586069; font-weight: 500; }
+    .form-group input {
+      border: 1px solid #d1d5da;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 0.95rem;
+      width: 180px;
+    }
+    .btn-pull {
+      background: #2ea44f;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 18px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-pull:hover { background: #2c974b; }
+    .btn-pull:disabled { background: #94d3a2; cursor: not-allowed; }
+
+    /* Result area */
+    #result {
+      display: none;
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    #result.success { background: #dcffe4; border: 1px solid #34d058; color: #155724; }
+    #result.error   { background: #ffeef0; border: 1px solid #f97583; color: #721c24; }
+
+    /* Info box */
+    .info-box {
+      background: #fff;
+      border: 1px solid #d1d5da;
+      border-radius: 8px;
+      padding: 20px 24px;
+    }
+    .info-box h3 { font-size: 1rem; margin-bottom: 10px; }
+    .info-box p  { font-size: 0.9rem; color: #586069; margin-bottom: 8px; line-height: 1.5; }
+    code {
+      background: #f3f4f6;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 0.85rem;
+      font-family: 'SFMono-Regular', Consolas, monospace;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
+    <h1>PullSync</h1>
+  </header>
+
+  <main>
+    <h2>Pull Requests</h2>
+
+    <div class="pr-form">
+      <h3>🔽 Pull a Pull Request</h3>
+      <p style="font-size:0.88rem;color:#586069;margin-bottom:14px;">
+        Fetch a pull request branch locally so you can review and test it.
+      </p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="prId">Pull Request #</label>
+          <input type="number" id="prId" placeholder="e.g. 42" min="1" />
+        </div>
+        <div class="form-group">
+          <label for="remote">Remote</label>
+          <input type="text" id="remote" placeholder="origin" value="origin" />
+        </div>
+        <button class="btn-pull" id="pullBtn" onclick="pullPR()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>
+          Pull
+        </button>
+      </div>
+      <div id="result"></div>
+    </div>
+
+    <div class="info-box">
+      <h3>ℹ️ How it works</h3>
+      <p>
+        Clicking <strong>Pull</strong> fetches the specified pull request from the remote and
+        creates a local branch named <code>pr-&lt;number&gt;</code>.
+      </p>
+      <p>
+        This is equivalent to running:<br/>
+        <code>git fetch origin pull/&lt;number&gt;/head:pr-&lt;number&gt;</code>
+      </p>
+    </div>
+  </main>
+
+  <script>
+    async function pullPR() {
+      const prId = document.getElementById('prId').value.trim();
+      const remote = document.getElementById('remote').value.trim() || 'origin';
+      const resultEl = document.getElementById('result');
+      const btn = document.getElementById('pullBtn');
+
+      if (!prId || parseInt(prId, 10) <= 0) {
+        showResult('error', 'Please enter a valid pull request number.');
+        return;
+      }
+
+      btn.disabled = true;
+      resultEl.style.display = 'none';
+
+      try {
+        const response = await fetch(`/api/pull-requests/${encodeURIComponent(prId)}/pull`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ remote }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          showResult('success', `✅ ${data.message}\nLocal branch: ${data.branch}`);
+        } else {
+          showResult('error', `❌ ${data.error}\n${data.details || ''}`);
+        }
+      } catch (err) {
+        showResult('error', `❌ Network error: ${err.message}`);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    function showResult(type, message) {
+      const el = document.getElementById('result');
+      el.className = type;
+      el.textContent = message;
+      el.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

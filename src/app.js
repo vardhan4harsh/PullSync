@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const pullRequestRoutes = require('./routes/pullRequests');
 
 const app = express();
 
@@ -16,6 +17,9 @@ app.get('/health', (req, res) => {
     version: '0.1.0'
   });
 });
+
+// Pull request routes
+app.use('/api/pull-requests', pullRequestRoutes);
 
 // 404 handler
 app.use((req, res) => {
