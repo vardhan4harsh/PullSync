@@ -1,12 +1,31 @@
 # PullSync
 
-A self-hosted, Git-native pull request review system with real-time collaboration.
+A self-hosted, Git-native pull request review system.
 
-## Project Status
+## Getting Started
 
-**Current Phase:** Initial Setup (v0.1.0)
+### Prerequisites
+- Node.js >= 18.0.0
+- MongoDB
+- Git
 
-This project is in early development. The initial skeleton is being established.
+### Installation
+
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd pullsync
+
+# Install dependencies
+npm install
+
+# Set up environment
+cp .env.example .env
+# Edit .env with your settings
+
+# Start development server
+npm run dev
+```
 
 ## Features (Planned)
 
@@ -47,39 +66,27 @@ pullsync/
 └── package.json
 ```
 
-##  Getting Started
-
-> **Note:** Setup instructions will be added as the project develops.
-
-### Prerequisites
-
-- Node.js >= 18.0.0
-- MongoDB
-- Git
-
-### Installation
-```bash
-# Clone the repository
-git clone <your-repo-url>
-cd pullsync
-
-# Install dependencies
-npm install
-
-# Copy environment variables
-cp .env.example .env
-
-# Edit .env with your configuration
-```
-
 ## Documentation
 
 - [Setup Guide](docs/SETUP.md)
 - [API Documentation](docs/API.md)
 
-## Contributing
+## Team
 
-This is our university project. Contributions and suggestions are welcome!
+- **Harsh Vardhan Singh** - Project Setup, Landing Page
+- **Harsh Gupta** - Authentication UI
+- **Devesh Tyagi** - Dashboard UI
+- **Gaurav Parashar** - User Backend
+- **Garima Yadav** - Repository Backend
+
+## Current Progress
+
+- [x] Project structure
+- [x] Landing page
+- [ ] Authentication pages
+- [ ] Dashboard
+- [ ] Backend APIs
+- [ ] Database integration
 
 ## License
 
