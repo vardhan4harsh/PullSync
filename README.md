@@ -21,6 +21,10 @@ pull-sync/
 ### 1 — Frontend
 
 ```bash
+dummy pr
+gjjhbkbkljbkjbl
+v hvkjvbkgbjgl
+
 cd frontend
 npm install
 npm run dev          # http://localhost:5173
