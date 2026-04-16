@@ -1,7 +1,7 @@
 Test 4
 # Pull-Sync 🔀
 
-A full-stack collaborative code review platform — GitHub-inspired UI, real-time notifications via WebSockets, MongoDB-backed persistence.
+A full-stack collaborative code review platform — GitHub-insphnfgfg g hnfthgcrr nfhcgrg nhfthertcr ggbired UI, real-time notifications via WebSockets, MongoDB-backed persistence.
 
 ---
 
