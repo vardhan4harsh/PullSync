@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  body {
+    background-color: #0d1117;
+    color: #e6edf3;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #161b22; }
+  ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #484f58; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-accent-blue text-canvas font-medium px-4 py-2 rounded-md text-sm hover:bg-blue-400 transition-all duration-150 active:scale-95;
+  }
+  .btn-secondary {
+    @apply bg-canvas-subtle border border-border text-fg text-sm px-4 py-2 rounded-md hover:bg-border transition-all duration-150 active:scale-95;
+  }
+  .btn-danger {
+    @apply bg-transparent border border-accent-red text-accent-red text-sm px-4 py-2 rounded-md hover:bg-accent-red hover:text-white transition-all duration-150;
+  }
+  .btn-success {
+    @apply bg-accent-green text-canvas font-medium px-4 py-2 rounded-md text-sm hover:bg-green-400 transition-all duration-150;
+  }
+  .card {
+    @apply bg-canvas-subtle border border-border rounded-lg;
+  }
+  .input {
+    @apply bg-canvas-inset border border-border rounded-md px-3 py-2 text-fg text-sm placeholder:text-fg-subtle focus:outline-none focus:border-accent-blue focus:ring-1 focus:ring-accent-blue transition-colors;
+  }
+  .badge-open { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-accent-green/10 text-accent-green border border-accent-green/20; }
+  .badge-approved { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-accent-blue/10 text-accent-blue border border-accent-blue/20; }
+  .badge-rejected { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-accent-red/10 text-accent-red border border-accent-red/20; }
+  .badge-draft { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-fg-subtle/20 text-fg-muted border border-border; }
+}
+
+.diff-add { background: rgba(63, 185, 80, 0.08); border-left: 3px solid #3fb950; }
+.diff-remove { background: rgba(248, 81, 73, 0.08); border-left: 3px solid #f85149; }
+.diff-neutral { border-left: 3px solid transparent; }
+
+.notification-dot::after {
+  content: '';
+  position: absolute;
+  top: 2px; right: 2px;
+  width: 8px; height: 8px;
+  background: #f85149;
+  border-radius: 50%;
+  border: 2px solid #0d1117;
+}
