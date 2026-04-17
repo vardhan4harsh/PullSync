@@ -1,0 +1,8 @@
+{
+  "name": "pull-sync-database",
+  "version": "1.0.0",
+  "description": "MongoDB Mongoose schemas for Pull-Sync",
+  "dependencies": {
+    "mongoose": "^8.0.0"
+  }
+}
