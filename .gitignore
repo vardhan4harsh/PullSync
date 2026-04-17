@@ -1,0 +1,26 @@
+# Node dependencies — each person installs these locally
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+database/node_modules/
+
+# Environment files — NEVER commit these (they contain secrets)
+.env
+backend/.env
+frontend/.env
+
+# Python virtual environment (if anyone used Python tools)
+.venv/
+
+# Build output
+frontend/dist/
+frontend/build/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
